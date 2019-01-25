@@ -1,0 +1,19 @@
+<section class="container">
+  <div class="row p-3 p-md-5">
+    <div class="offset-md-4 col-md-4">
+       <app-message></app-message>
+       <div class="bg-primary p-3">
+        <h3 class="text-center text-light"><span class="pr-2 fa fa-sign-in"></span>Login</h3>
+        <form>
+          <div class="form-group">
+            <input class="form-control" type="email" name="email" [(ngModel)]="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+              <input class="form-control" type="password" name="password" [(ngModel)]="password" placeholder="password">
+          </div>
+          <button class="btn btn-light btn-block" (click)="login()">Login</button>
+        </form>
+       </div> 
+    </div>
+  </div>
+</section>

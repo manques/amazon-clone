@@ -1,0 +1,27 @@
+<section class="container">
+    <div class="row p-3 p-md-5">
+      <div class="offset-md-4 col-md-4">
+        <app-message></app-message>
+        <div class="bg-primary p-3">
+            <h3 class="text-center text-light"><span class="pr-2 fa fa-registered"></span>Register</h3>
+            <form>
+              <div class="form-group">
+                    <input class="form-control" type="text" name="name" [(ngModel)]="name" placeholder="name">
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="email" name="email" [(ngModel)]="email" placeholder="Email">
+              </div>
+              <div class="form-group">
+                  <input class="form-control" type="password" name="password" [(ngModel)]="password" placeholder="password">
+              </div>
+              <div class="form-check pb-2">
+                <label class="form-check-label">
+                  <input type="checkbox" name="isSeller" class="form-check-input" [(ngModel)]="isSeller"> <span class="text-light">isSeller</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-light btn-block" (click)="register()">Register</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </section>

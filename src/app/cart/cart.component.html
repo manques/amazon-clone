@@ -1,0 +1,70 @@
+<section id="cart">
+  <div class="container-fluid p-4 p-md-5">
+    <!-- <div *ngIf="!getItems" class="m-auto">
+      <div class="text-center display-4 mt-3">
+        <div class="fa fa-spin fa-spinner"></div>
+      </div>
+    </div> -->
+    <app-message></app-message>
+    <div *ngIf="!getItems.length">
+      <h3 class="text-center">No cart Items!!!</h3>
+    </div>
+    <div  *ngIf="getItems.length" class="row">
+      <div class="col-md-9">
+        <h3>Shopping Cart</h3>
+        <div class="row">
+          <div class="offset-md-8 d-none d-md-block col-2">
+            <small class="text-muted">Price</small>
+          </div>
+          <div class="col-2 d-none d-md-block">
+            <small class="text-muted">Quantity</small>
+          </div>
+        </div>
+        <hr>
+        <div *ngFor="let product of getItems; let i = index; trackBy: trackByCartItems;">
+          <div class="row">
+            <div class="col-3 col-md-3">
+              <a routerLink="/product/{{product._id}}">
+                <img [src]="product.image" class="img-thumbnail" [alt]="product.title">
+              </a>
+            </div>
+            <div class="col-3 col-md-5 pl-2">
+              <h4>
+                <a routerLink="/product/{{product._id}}" >
+                 <span class="small lead-md"> {{product.title}}</span>
+                </a>
+              </h4>
+              <p class="m-0 p-0">
+                <small class="text-muted">{{product.owner.name}}</small>
+              </p>
+              <p class="m-0 p-0">
+                <small class="text-muted">{{product.category.name}}</small>
+              </p>
+                <small class="text-danger" (click)="removeCart(product, i)">Remove</small>
+            </div>
+            <div class="col-3 col-md-2">
+              <p>
+                Price: <span class="text-danger">{{product.price | currency: "&#8377;"}}</span>
+              </p>
+            </div>
+            <div class="col-3 col-md-2">
+              <!-- <input type="number" class="form-control" name="quantity" min="1" max="100">-->
+              {{quantities[i]}} 
+            </div>
+            
+          </div>
+          <hr>
+        </div>
+        <h5 class="text-right px-3">Total Price: <span class="text-danger">{{totalPrice | currency: "&#8377;"}}</span></h5>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <div class="card-title text-center">Total Price: <span class="text-danger">{{totalPrice | currency: "&#8377;"}}</span></div>
+            <button class="btn btn-info btn-block" (click)="checkout()" [disabled]="btnDisabled">Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

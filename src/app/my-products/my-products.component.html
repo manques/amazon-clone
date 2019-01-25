@@ -1,0 +1,38 @@
+<section id="my-products">
+  <div class="container p-3 p-md-5">
+    <div *ngIf="!data" class="m-auto">
+      <p class="text-center display-2 mt-3">
+        <i class="fa fa-spin fa-spinner"></i>
+      </p>
+    </div>
+    <div *ngIf="data && !data.myProducts" class="text-center mt-3 display-4">No Product Found!!</div>
+    <div *ngIf="data && data.myProducts">
+        <h3>My Products</h3>
+        <div class="row">
+            <div class="offset-10 d-none d-md-block col-2">
+              <small class="muted">Price</small>
+            </div>
+        </div>
+        <hr>
+        <div *ngFor="let product of data.myProducts">
+          <div class="row">
+            <div class="col-4 col-md-2">
+              <a routerLink="/product/{{product._id}}"><img [src]="product.image" class="img-thumbnail"></a>
+            </div>
+            <div class="col-4 col-md-8 px-0 pl-md-3">
+              <h3><a routerLink="/product/{{product._id}}">{{product.title}}</a></h3>
+              <p>
+                <a routerLink="/categories/{{product.category._id}}">
+                  <small class="muted">{{product.category.name}}</small>
+                </a>
+              </p>
+            </div>
+            <div class="col-4 col-md-2">
+              <p class="text-danger">{{product.price | currency: "&#8377;"}}</p>
+            </div>
+          </div>
+          <hr>
+        </div>
+    </div>
+  </div>
+</section>

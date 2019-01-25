@@ -1,0 +1,90 @@
+<section id="product">
+  <div class="container-fluid p-5">
+    <div *ngIf="!product" class="m-auto">
+      <div class="text-center display-4 mt-3">
+        <i class="fa fa-spin fa-spinner"></i>
+      </div>
+    </div>
+    <div *ngIf="product">
+      <app-message></app-message>
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <img [src]="product.image" [alt]="product.title" class="img-thumbnail">
+        </div>
+        <div class="col-lg-5 mb-3">
+          <div class="row">
+            <div class="col-6 pl-md-3">
+              <h3 >{{product.title}}</h3>
+              <p class="m-0 p-0">
+                <a routerLink="\login">
+                  <small>{{product.owner.name}}</small>
+                </a>
+              </p>
+              <p class="m-0 p-0">
+                <a routerLink="/categories/{{product.category._id}}">
+                  <small class="text-muted">{{product.category.name}}</small>
+                </a>
+              </p>
+            </div>
+            <div class="col-6">
+              <ngb-rating [(rate)]="product.averageRating" [starTemplate]="t" max="5" [readonly]="true"></ngb-rating>
+            </div>
+          </div>
+          <p class="">{{product.description}}</p>
+        </div>
+        <div class="col-lg-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <p class="">
+                Price: <span class="text-danger">{{product.price | currency: "&#8377;"}}</span>
+              </p>
+              <button class="btn btn-info btn-block" (click)="postCart()">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3 mx-md-5">
+        <div class="col-12">
+            <h3>Review</h3>
+            <hr>
+          <div *ngFor="let review of product.reviews">
+              <div class="Review">
+                  <img [src]="review.owner.picture" [alt]="review.owner.name" class="img-thumbnail rounded-circle"><span class="pl-3">{{review.owner.name}}</span>
+              </div>
+              <div>
+                  <ngb-rating [(rate)]="review.rating" [starTemplate]="t" max="5" [readonly]="true"></ngb-rating>
+                  <p class="font-weight-bold">
+                    {{review.title}}
+                  </p>
+              </div>
+              <p class="">{{review.comment}}</p>
+              <hr>
+          </div>
+        </div>
+        <div class="col-12 bg-light p-3 p-md-5">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" 
+                     [(ngModel)]="myReview.title" name="myReview.title" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <textarea type="text" class="form-control"  rows="5" [(ngModel)]="myReview.comment" name="myReview.comment" placeholder="Comment">
+              </textarea>
+            </div>
+            <ngb-rating [(rate)]="myReview.rating" max="5" [readonly]="false" [starTemplate]="t"></ngb-rating>
+            <button class="btn btn-warning btn-block" (click)="postReview()" [disabled]="btnDisabled">Review</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #t let-fill="fill">
+  <span *ngIf="fill == 100" class="star full">&#9733;</span>
+  <span *ngIf="fill == 0" class="star">&#9733;</span>
+  <span *ngIf="fill > 0 && fill < 100" class="star">
+    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+  </span>
+</ng-template>

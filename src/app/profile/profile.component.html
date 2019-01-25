@@ -1,0 +1,75 @@
+<section class="profile">
+  <div class="container p-5">
+    <div *ngIf="!data.user" class="m-auto">
+      <h3 class="display-3 text-center mt-5">
+        <i class="fa fa-spin fa-spinner"></i>
+      </h3>
+    </div>
+    <div *ngIf="data.user">
+      <p class="display-2 mt-3">Profile</p>
+      <hr>
+      <div class="row">
+        <div class="col-md-3 mb-5 mb-md-0">
+          <img [src]="data.user.picture" [alt]="data.user.name" class="img-thumbnail rounded-circle w-100">
+        </div>
+        <div class="col-md-8 ml-3">
+          <div class="">
+            <h2 class="lead">{{data.user.name}}</h2>
+            <br>
+            <h3 class="lead">{{data.user.email}}</h3>
+            <br>
+            <p class="btn btn-warning" routerLink="/order">My Orders</p>
+            <br>
+            <p class="btn btn-warning" routerLink="/profile/settings">Change Account Settings</p>
+            <br>
+            <p class="btn btn-warning" routerLink="/profile/address">Change Address Settings</p>
+          </div>
+          <div *ngIf="data.address" class="py-2">
+            <h3>Address</h3>
+            <hr>
+            <table class="table table-responsive table-borderless">
+              <tbody>
+                <tr>
+                  <td class="text-right">Address1 : </td>
+                  <td>{{data.address.add1}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">Address2 : </td>
+                  <td>{{data.address?.add2}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">City : </td>
+                  <td>{{data.address?.city}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">State : </td>
+                  <td>{{data.address?.state}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">Country : </td>
+                  <td>{{data.address?.country}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">Postal Code : </td>
+                  <td>{{data.address?.postalCode}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="data.user.isSeller">
+              <h3>Seller Actions</h3>
+              <hr>
+              <div  class="row">
+                  <div class="col-md-6 mb-2 mb-md-0">
+                    <a class="btn btn-outline-success btn-outline-success btn-block" routerLink="/profile/post-product">Post Product for Sale</a>
+                  </div>
+                  <div class="col-md-6">
+                    <a class="btn btn-outline-success btn-block" routerLink="/profile/my-products">My Product</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

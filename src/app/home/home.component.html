@@ -1,0 +1,30 @@
+<app-carousel></app-carousel>
+<!-- <app-message></app-message> -->
+<div class="container p-5">
+    <h3 class="text-center mb-3">Products</h3>
+    <div *ngIf="!products" class="m-auto">
+        <div class="text-center display-4 mt-3">
+            <i class="fa fa-spin fa-spinner"></i>
+        </div>
+    </div>
+    <div *ngIf="products" class="row">
+        <div *ngFor="let product of products" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card bg-light p-1 shadow rounded">
+                <a routerLink="/product/{{product._id}}">
+                    <img [src]="product.image" [alt]="product.title" class="card-img-top">
+                </a>
+                <div class="card-body">
+                    <div class="card-title text-center font-weight-bold">
+                        <a routerLink="/product/{{product._id}}"> {{product.title}}</a>
+                    </div>
+                    <div class="card-text">
+                        <p class="text-center text-info m-0">Price <span class="text-danger">{{product.price | currency: "&#8377;"}}</span></p>
+                        <p class="text-center m-0  ">
+                            <small class=""> {{product.description}}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
